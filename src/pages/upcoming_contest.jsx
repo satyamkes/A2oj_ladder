@@ -51,7 +51,27 @@ const getBadgeColor = (type) => {
       return "bg-gray-100 text-gray-800";
   }
 };
+const generateGoogleCalendarLink = (contest) => {
+  const startDate = new Date(contest.startTimeSeconds * 1000);
+  const endDate = new Date(
+    contest.startTimeSeconds * 1000 + contest.durationSeconds * 1000
+  );
 
+  const formatDateTime = (date) =>
+    date.toISOString().replace(/-|:|\.\d+/g, ""); // Format: YYYYMMDDTHHmmssZ
+
+  const start = formatDateTime(startDate);
+  const end = formatDateTime(endDate);
+
+  const url = new URL("https://www.google.com/calendar/render");
+  url.searchParams.set("action", "TEMPLATE");
+  url.searchParams.set("text", contest.name);
+  url.searchParams.set("dates", `${start}/${end}`);
+  url.searchParams.set("details", `Register here: https://codeforces.com/contestRegistration/${contest.id}`);
+  url.searchParams.set("location", "https://codeforces.com");
+
+  return url.toString();
+};
 const UpcomingContests = () => {
   const [contests, setContests] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -160,7 +180,9 @@ const UpcomingContests = () => {
               Register for Contest
             </button>
             <button 
-            onClick={() => window.open(`https://codeforces.com/contestRegistration/2080`, "_blank")}
+            onClick={() =>
+              window.open(generateGoogleCalendarLink(contest), "_blank")
+            }
             className="ml-2 bg-white hover:bg-indigo-50 text-indigo-600 border border-indigo-200 py-2 px-4 rounded-md text-sm transition-colors duration-200">
               Add to Calendar
             </button>
