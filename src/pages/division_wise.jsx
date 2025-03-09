@@ -7,13 +7,13 @@ const Division_Ladder = () => {
   const [loading, setLoading] = useState(false);
   const [problemsView, setProblemsView] = useState([]);
   const location = useLocation();
-  const receivedData = location.state?.data || [];
-  
+  const {receivedData,handle} = location.state || {};
   useEffect(() => {
-    setProblemsView(receivedData);
-  }, [receivedData]);
-
-  const handle = "sarafarajnasardi";
+      if (Array.isArray(receivedData)) {
+        setProblemsView(receivedData);
+      }
+    }, [receivedData]);
+    
   useEffect(() => {
     loadSolvedProblems(handle);
   }, []);

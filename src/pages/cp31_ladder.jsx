@@ -2,23 +2,25 @@ import React, { useState, useEffect } from "react";
 import { CheckCircle, Award, ArrowLeft, Code, BarChart } from "lucide-react";
 import { useLocation, Link } from 'react-router-dom';
 
-const Rating_Ladder = () => {
+const CP31_ladder = () => {
   const [solvedProblems, setSolvedProblems] = useState(new Set());
   const [loading, setLoading] = useState(false);
   const [problemsView, setProblemsView] = useState([]);
   const location = useLocation();
-  const {receivedData,handle} = location.state || {};
+  const receivedData = location.state?.data || [];
   
   useEffect(() => {
-    if (Array.isArray(receivedData)) {
-      setProblemsView(receivedData);
-    }
+    setProblemsView(receivedData);
   }, [receivedData]);
-  
 
+  const handle = location.state?.username || 'sarafarajnasardi';
+  const selectedRating = location.state?.rating || 'Codeforces Rating: 800';
+  
   useEffect(() => {
-    loadSolvedProblems(handle);
-  }, []);
+    if (handle) {
+      loadSolvedProblems(handle);
+    }
+  }, [handle]);
 
   const loadSolvedProblems = async (handle) => {
     setLoading(true);
@@ -49,6 +51,7 @@ const Rating_Ladder = () => {
   };
 
   const getRatingColor = (rating) => {
+    if (!rating) return "text-gray-700 bg-gray-50 border-gray-200";
     if (rating < 1200) return "text-gray-700 bg-gray-50 border-gray-200";
     if (rating < 1400) return "text-green-700 bg-green-50 border-green-200";
     if (rating < 1600) return "text-cyan-700 bg-cyan-50 border-cyan-200";
@@ -60,9 +63,14 @@ const Rating_Ladder = () => {
 
   // Calculate progress
   const totalProblems = problemsView.length;
-  const solvedCount = problemsView.filter(problem => 
-    solvedProblems.has(`${problem[2]}${problem[3]}`)
-  ).length;
+  const solvedCount = problemsView.filter(problem => {
+    // Check for both array format and object format
+    const id = Array.isArray(problem) 
+      ? `${problem[2]}${problem[3]}`
+      : `${problem.contestId}${problem.index}`;
+    return solvedProblems.has(id);
+  }).length;
+  
   const progressPercentage = totalProblems > 0 ? (solvedCount / totalProblems) * 100 : 0;
 
   return (
@@ -80,7 +88,7 @@ const Rating_Ladder = () => {
               <Code className="h-12 w-12 text-black" />
             </div>
             <h1 className="text-4xl font-bold text-black mb-3 tracking-tight">
-              A2OJ Ladder
+              {selectedRating}
             </h1>
             <div className="w-16 h-1 bg-black mx-auto mb-4"></div>
             <p className="text-xl text-gray-700 max-w-2xl mx-auto font-light">
@@ -137,33 +145,40 @@ const Rating_Ladder = () => {
             </div>
           ) : (
             <div className="space-y-3">
-              {problemsView.map((problem) => {
-                const problemId = `${problem[2]}${problem[3]}`;
+              {problemsView.map((problem, index) => {
+                // Handle both array and object formats
+               
+                const contestId = problem.contestId;
+                const problemIndex =  problem.index;
+                const title = problem.title;
+                const rating =  problem.rating;
+                
+                const problemId = `${contestId}${problemIndex}`;
                 const isSolved = solvedProblems.has(problemId);
   
                 return (
                   <div
-                    key={problemId}
+                    key={`${problemId}-${index}`}
                     className={`flex items-center p-4 rounded-lg border ${
                       isSolved ? "bg-green-50 border-green-200" : "bg-white border-gray-200"
                     } hover:shadow-md transition-all group`}
                   >
                     <div
                       className={`text-sm font-medium px-3 py-1 rounded-full border ${getRatingColor(
-                        problem[0]
+                        rating
                       )}`}
                     >
-                      {problem[0]}
+                      {rating || "N/A"}
                     </div>
                     <a
-                      href={`https://codeforces.com/problemset/problem/${problem[2]}/${problem[3]}`}
+                      href={`https://codeforces.com/problemset/problem/${contestId}/${problemIndex}`}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="flex-grow ml-4 font-medium text-black group-hover:text-blue-600 transition-colors"
                     >
-                      {problem[1]}
+                      {title}
                       <span className="ml-2 text-gray-500 text-sm">
-                        ({problem[2]}{problem[3]})
+                        ({contestId}{problemIndex})
                       </span>
                     </a>
                     <div className="flex items-center gap-3 ml-4">
@@ -189,4 +204,4 @@ const Rating_Ladder = () => {
   );
 };
 
-export default Rating_Ladder;
+export default CP31_ladder;

@@ -1,21 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
-import { ChevronUp, ChevronDown, Code, Award, User } from 'lucide-react';
-import { BrowserRouter as Router, Route, Routes, useNavigate } from "react-router-dom";
-import { Outlet } from 'react-router-dom';
-const CodeforceRatingLadder = () => {
-  const [username, setUsername] = useState('sarafarajnasardi');
-  const [isRatingDropdownOpen, setIsRatingDropdownOpen] = useState(false);
-  const [isLadderTypeOpen, setIsLadderTypeOpen] = useState(false);
-  const [selectedLadderType, setSelectedLadderType] = useState('Rating');
-  const [selectedRating, setSelectedRating] = useState('Codeforces Rating < 1300');
-  const [selectedDivision, setSelectedDivision] = useState('');
-  
-  const ratingDropdownRef = useRef(null);
-  const ladderTypeDropdownRef = useRef(null);
-  const navigate = useNavigate();
-
-  const ladderTypes = ['Rating', 'Division'];
- const div_a = [
+export const div_a = [
     [1, 'Watermelon', '4', 'A'] ,
     [2, 'Way Too Long Words', '71', 'A'] ,
     [3, 'String Task', '118', 'A'] ,
@@ -118,7 +101,7 @@ const CodeforceRatingLadder = () => {
     [100, 'Cinema', '200', 'A'] 
 ]
 
-const div_b = [
+export const div_b = [
     [1, 'Queue at the School', '266', 'B'] ,
     [2, 'Xenia and Ringroad', '339', 'B'] ,
     [3, 'Fedor and New Game', '467', 'B'] ,
@@ -221,7 +204,7 @@ const div_b = [
     [100, 'Three matrices', '393', 'B'] ,
 ]
 
-const div_c = [
+export const div_c = [
     [1, 'Given Length and Sum of Digits...', '489', 'C'] ,
     [2, 'Number of Ways', '466', 'C'] ,
     [3, 'Team', '401', 'C'] ,
@@ -324,7 +307,7 @@ const div_c = [
     [100, 'Crossword', '47', 'C'] 
 ]
 
-const div_d = [
+export const div_d = [
     [1, 'Flowers', '474', 'D'] ,
     [2, 'Prizes, Prizes, more Prizes', '208', 'D'] ,
     [3, 'Xenia and Bit Operations', '339', 'D'] ,
@@ -427,7 +410,7 @@ const div_d = [
     [100, 'Help King', '98', 'B']
 ]
 
-const div_e = [
+export const div_e = [
     [1, 'Pashmak and Graph', '459', 'E'] ,
     [2, 'Civilization', '455', 'C'] ,
     [3, 'Sereja and Brackets', '380', 'C'] ,
@@ -529,7 +512,7 @@ const div_e = [
     [99, 'MUH and Lots and Lots of Segments', '471', 'E'] 
 ]
 
-const div_1d = [
+export const div_1d = [
     [1, 'Tricky Function', '429', 'D'] ,
     [2, 'Characteristics of Rectangles', '333', 'D'] ,
     [3, 'Antimatter', '383', 'D'] ,
@@ -632,7 +615,7 @@ const div_1d = [
     [100, 'Cube Snake', '198', 'D'] 
 ]
 
-const div_1e = [
+export const div_1e = [
     [1, 'Jeff and Permutation', '351', 'E'] ,
     [2, 'Lucky Number Representation', '354', 'E'] ,
     [3, 'Lucky Queries', '145', 'E'] ,
@@ -735,7 +718,7 @@ const div_1e = [
     [100, 'Permanent', '468', 'E']
 ]
 
-const rating_1 = [
+export const rating_1 = [
   [ 1, 'Young Physicist', '69', 'A' ],
   [ 2, 'Beautiful Matrix', '263', 'A' ],
   [ 3, 'Queue at the School', '266', 'B' ],
@@ -838,7 +821,7 @@ const rating_1 = [
   [ 100, 'Adding Digits', '260', 'A' ]
 ]
 
-const rating_2 = [
+export const rating_2 = [
   [ 1, 'Arrival of the General', '144', 'A' ],
   [ 2, 'Beautiful Matrix', '263', 'A' ],
   [ 3, 'Ultra-Fast Mathematician', '61', 'A' ],
@@ -941,7 +924,7 @@ const rating_2 = [
   [ 100, 'Painting Eggs', '282', 'B' ]
 ]
 
-const rating_3 = [
+export const rating_3 = [
   [ 1, 'Choosing Teams', '432', 'A' ],
   [ 2, 'Nearly Lucky Number', '110', 'A' ],
   [ 3, 'Amusing Joke', '141', 'A' ],
@@ -1044,7 +1027,7 @@ const rating_3 = [
   [ 100, 'Gargari and Bishops', '463', 'C' ]
 ]
 
-const rating_4 = [
+export const rating_4 = [
   [ 1, 'Presents', '136', 'A' ],
   [ 2, 'Nearly Lucky Number', '110', 'A' ],
   [ 3, 'Petya and Strings', '112', 'A' ],
@@ -1147,7 +1130,7 @@ const rating_4 = [
   [ 100, 'Multiplication Table', '448', 'D' ]
 ]
 
-const rating_5 = [
+export const rating_5 = [
   [ 1, 'Boy or Girl', '236', 'A' ],
   [ 2, 'Beautiful Matrix', '263', 'A' ],
   [ 3, 'Team', '231', 'A' ],
@@ -1250,7 +1233,7 @@ const rating_5 = [
   [ 100, 'Good Substrings', '271', 'D' ]
 ]
 
-const rating_6 = [
+export const rating_6 = [
   [ 1, 'Candy Bags', '334', 'A' ],
   [ 2, 'Word', '59', 'A' ],
   [ 3, 'Dreamoon and Stairs', '476', 'A' ],
@@ -1353,7 +1336,7 @@ const rating_6 = [
   [ 100, 'Tree Requests', '570', 'D' ]
 ]
 
-const rating_7 = [
+export const rating_7 = [
   [ 1, 'Anton and Letters', '443', 'A' ],
   [ 2, 'Way Too Long Words', '71', 'A' ],
   [ 3, 'Young Physicist', '69', 'A' ],
@@ -1456,7 +1439,7 @@ const rating_7 = [
   [ 100, 'Xenia and Tree', '342', 'E' ]
 ]
 
-const rating_8 = [
+export const rating_8 = [
   [ 1, 'Sereja and Dima', '381', 'A' ],
   [ 2, 'Gravity Flip', '405', 'A' ],
   [ 3, 'Little Pony and Crystal Mine', '454', 'A' ],
@@ -1559,7 +1542,7 @@ const rating_8 = [
   [ 100, 'Serega and Fun', '455', 'D' ]
 ]
 
-const rating_9 = [
+export const rating_9 = [
   [ 1, 'Fox And Snake', '510', 'A' ],
   [ 2, 'Pangram', '520', 'A' ],
   [ 3, 'Vanya and Cubes', '492', 'A' ],
@@ -1662,7 +1645,7 @@ const rating_9 = [
   [ 100, 'Serega and Fun', '455', 'D' ]
 ]
 
-const rating_10 = [
+export const rating_10 = [
   [ 1, 'Anton and Letters', '443', 'A' ],
   [ 2, 'Watching a movie', '499', 'A' ],
   [ 3, 'Expression', '479', 'A' ],
@@ -1765,7 +1748,7 @@ const rating_10 = [
   [ 100, 'Function', '455', 'E' ]
 ]
 
-const rating_11 = [
+export const rating_11 = [
   [ 1, 'Pangram', '520', 'A' ],
   [ 2, 'Fox And Snake', '510', 'A' ],
   [ 3, 'Insomnia cure', '148', 'A' ],
@@ -1867,254 +1850,3 @@ const rating_11 = [
   [ 99, 'Warrior and Archer', '594', 'A' ],
   [ 100, 'Birthday', '590', 'E' ]
 ]
-  const ratingOptions = [
-    'Codeforces Rating < 1300',
-    'Codeforces Rating: 1300-1399',
-    'Codeforces Rating: 1400-1499',
-    'Codeforces Rating: 1500-1599',
-    'Codeforces Rating: 1600-1699',
-    'Codeforces Rating: 1700-1799',
-    'Codeforces Rating: 1800-1899',
-    'Codeforces Rating: 1900-1999',
-    'Codeforces Rating: 2000-2099',
-    'Codeforces Rating: 2100-2199',
-    'Codeforces Rating: 2200+'
-  ];
-  
-  const divisionOptions = [
-    'Division A',
-    'Division B',
-    'Division C',
-    'Division D',
-    'Division E'
-  ];
-  
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (ratingDropdownRef.current && !ratingDropdownRef.current.contains(event.target)) {
-        setIsRatingDropdownOpen(false);
-      }
-      if (ladderTypeDropdownRef.current && !ladderTypeDropdownRef.current.contains(event.target)) {
-        setIsLadderTypeOpen(false);
-      }
-    };
-    
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
-  }, []);
-
-  // Get dropdown options based on selected ladder type
-  const getDropdownOptions = () => {
-    if (selectedLadderType === 'Rating') {
-      return ratingOptions;
-    } else if (selectedLadderType === 'Division') {
-      return divisionOptions;
-    } else {
-      return ['Option 1', 'Option 2', 'Option 3']; // Placeholder for other types
-    }
-  };
-
-  // Get the current selection based on ladder type
-  const getCurrentSelection = () => {
-    if (selectedLadderType === 'Rating') {
-      return selectedRating;
-    } else if (selectedLadderType === 'Division') {
-      return selectedDivision || divisionOptions[0];
-    } else {
-      return 'Select an option';
-    }
-  };
-
-  // Handle option selection
-  const handleOptionSelect = (option) => {
-    if (selectedLadderType === 'Rating') {
-      setSelectedRating(option);
-    } else if (selectedLadderType === 'Division') {
-      setSelectedDivision(option);
-    }
-    setIsRatingDropdownOpen(false);
-  };
-
-  // Update selection when ladder type changes
-  useEffect(() => {
-    if (selectedLadderType === 'Rating' && !selectedRating) {
-      setSelectedRating(ratingOptions[0]);
-    } else if (selectedLadderType === 'Division' && !selectedDivision) {
-      setSelectedDivision(divisionOptions[0]);
-    }
-  }, [selectedLadderType]);
-
-  const handleViewLadder = () => {
-    if (selectedLadderType === 'Rating') {
-        let problems=rating_1
-        if(selectedRating=="Codeforces Rating < 1300"){
-           problems=rating_1
-        }else if(selectedRating=="Codeforces Rating: 1300-1399"){
-           problems=rating_2
-        } else if(selectedRating=="Codeforces Rating: 1400-1499"){
-           problems=rating_3
-        } else if(selectedRating=="Codeforces Rating: 1500-1599"){
-           problems=rating_4
-        } else if(selectedRating=="Codeforces Rating: 1600-1699"){
-           problems=rating_5
-        } else if(selectedRating=="Codeforces Rating: 1700-1799"){
-           problems=rating_6
-        } else if(selectedRating=="Codeforces Rating: 1800-1899"){
-           problems=rating_7
-        } else if(selectedRating=="Codeforces Rating: 1900-1999"){
-           problems=rating_8
-        } else if(selectedRating=="Codeforces Rating: 2000-2099"){
-           problems=rating_9
-        } else if(selectedRating=="Codeforces Rating: 2100-2199"){
-           problems=rating_10
-        } else{
-           problems=rating_11
-        }
-        navigate('/Rating_ladder', { state: { data: problems } });
-    } else {
-      let problems=div_a
-     if(selectedDivision=="Division A"){
-       problems=div_a;
-     }else if(selectedDivision=="Division B"){
-       problems=div_b;
-     }else if(selectedDivision=="Division C"){
-       problems=div_c;
-     }else if(selectedDivision=="Division D"){
-       problems=div_d;
-     }else if(selectedDivision=="Division E"){
-       problems=div_e;
-     }
-     navigate('/Division_ladder', { state: { data: problems } });
-    }
-    
-  };
-  return (
-    <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-gray-50 to-gray-200">
-      <Outlet />
-      <div className="w-full max-w-lg p-8 bg-white rounded-xl border border-gray-200 shadow-lg">
-        <div className="text-center mb-8">
-          <div className="flex justify-center mb-4">
-            <Code className="h-12 w-12 text-black" />
-          </div>
-          <h1 className="text-4xl md:text-5xl font-bold text-black mb-3 tracking-tight">
-            A2OJ Ladder
-          </h1>
-          <p className="text-gray-600 mb-4">Enhance your competitive programming skills</p>
-          <div className="w-16 h-1 bg-black mx-auto"></div>
-        </div>
-        
-        <div className="space-y-6">
-          {/* Username Input */}
-          <div className="space-y-2">
-            <label className="flex items-center text-sm font-medium text-gray-700">
-              <User className="h-4 w-4 mr-2" />
-              Codeforces Username
-              <span className="ml-1 text-red-500">*</span>
-            </label>
-            <div className="relative">
-              <input
-                type="text"
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
-                className="w-full bg-gray-50 text-black px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent transition-all duration-200"
-                placeholder="Enter your username"
-              />
-            </div>
-          </div>
-  
-          {/* Ladder Type Dropdown */}
-          <div className="space-y-2" ref={ladderTypeDropdownRef}>
-            <label className="flex items-center text-sm font-medium text-gray-700">
-              <Award className="h-4 w-4 mr-2" />
-              Ladder Type
-            </label>
-            <div className="relative">
-              <div 
-                className="w-full bg-gray-50 text-black px-4 py-3 rounded-lg cursor-pointer flex items-center justify-between border border-gray-300 hover:border-gray-400 transition-all duration-200"
-                onClick={() => setIsLadderTypeOpen(!isLadderTypeOpen)}
-              >
-                <span>{selectedLadderType}</span>
-                {isLadderTypeOpen ? 
-                  <ChevronUp className="h-5 w-5 text-gray-600" /> : 
-                  <ChevronDown className="h-5 w-5 text-gray-600" />
-                }
-              </div>
-              
-              {isLadderTypeOpen && (
-                <div className="absolute z-10 w-full mt-1 bg-white border border-gray-300 rounded-lg shadow-lg overflow-hidden">
-                  {ladderTypes.map((type, index) => (
-                    <div 
-                      key={index}
-                      className="px-4 py-3 text-black hover:bg-gray-100 cursor-pointer transition-colors duration-150"
-                      onClick={() => {
-                        setSelectedLadderType(type);
-                        setIsLadderTypeOpen(false);
-                      }}
-                    >
-                      {type}
-                    </div>
-                  ))}
-                </div>
-              )}
-            </div>
-          </div>
-  
-          {/* Rating/Division Selection */}
-          <div className="space-y-2" ref={ratingDropdownRef}>
-            <label className="flex items-center text-sm font-medium text-gray-700">
-              <Award className="h-4 w-4 mr-2" />
-              {selectedLadderType === 'Rating' ? 'By Rating' : 
-               selectedLadderType === 'Division' ? 'By Division' : 
-               `By ${selectedLadderType.toLowerCase()}`}
-            </label>
-            <div className="relative">
-              <div 
-                className="w-full bg-gray-50 text-black px-4 py-3 rounded-lg cursor-pointer flex items-center justify-between border border-gray-300 hover:border-gray-400 transition-all duration-200"
-                onClick={() => setIsRatingDropdownOpen(!isRatingDropdownOpen)}
-              >
-                <span>{getCurrentSelection()}</span>
-                {isRatingDropdownOpen ? 
-                  <ChevronUp className="h-5 w-5 text-gray-600" /> : 
-                  <ChevronDown className="h-5 w-5 text-gray-600" />
-                }
-              </div>
-              
-              {isRatingDropdownOpen && (
-                <div className="absolute z-10 w-full mt-1 bg-white border border-gray-300 rounded-lg shadow-lg max-h-60 overflow-y-auto">
-                  {getDropdownOptions().map((option, index) => (
-                    <div 
-                      key={index}
-                      className="px-4 py-3 text-black hover:bg-gray-100 cursor-pointer transition-colors duration-150"
-                      onClick={() => handleOptionSelect(option)}
-                    >
-                      {option}
-                    </div>
-                  ))}
-                </div>
-              )}
-            </div>
-          </div>
-  
-          {/* View Ladder Button */}
-          <div className="pt-4">
-            <button 
-              onClick={handleViewLadder} 
-              className="w-full bg-black hover:bg-gray-800 text-white font-medium px-6 py-3 rounded-lg transition-colors duration-200 shadow-md hover:shadow-lg flex items-center justify-center"
-            >
-              <Code className="h-5 w-5 mr-2" />
-              View Ladder
-            </button>
-          </div>
-        </div>
-        
-        <div className="mt-8 pt-6 text-center text-sm text-gray-500 border-t border-gray-200">
-          Improve your Codeforces rating with structured problem sets
-        </div>
-      </div>
-    </div>
-  );
-};
-
-export default CodeforceRatingLadder;
