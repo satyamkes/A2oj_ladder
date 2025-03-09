@@ -51,7 +51,7 @@ const CoursePage = () => {
               className="px-4 py-2 bg-white text-indigo-700 rounded-md shadow-md hover:shadow-lg transition-all duration-200 text-sm font-medium flex items-center"
             >
               <BookOpen className="h-4 w-4 mr-2" />
-              Learning Resources
+              CP Sheets
             </button>
             <button 
               onClick={() => handleTabChange(1)} 
