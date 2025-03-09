@@ -6,11 +6,15 @@ import Division_Ladder from "./pages/division_wise";
 import CP31 from "./pages/cp31_page";
 import CP31_ladder from "./pages/cp31_ladder";
 import CoursePage from "./pages/course_page";
+import UpcomingContestsPage from "./pages/upcoming_contest";
+import Cp_Sheets from "./pages/cp_sheets";
 const App = () => {
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<CoursePage />} />
+        <Route path="/Upcoming_contests" element={<UpcomingContestsPage/>} />
+        <Route path="/Cp_Sheets" element={<Cp_Sheets/>} />
         <Route path="/A2oj" element={<A2oJ/>} />
         <Route path="/Rating_ladder" element={<Rating_Ladder/>} />
         <Route path="/Division_ladder" element={<Division_Ladder/>} />
