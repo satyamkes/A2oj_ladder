@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { ChevronDown, ChevronUp } from 'lucide-react';
+import { ChevronUp, ChevronDown, Code, Award, User } from 'lucide-react';
 import { BrowserRouter as Router, Route, Routes, useNavigate } from "react-router-dom";
 import { Outlet } from 'react-router-dom';
 const CodeforceRatingLadder = () => {
@@ -1991,37 +1991,48 @@ const rating_11 = [
     
   };
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-100">
-      <Outlet></Outlet>
-      <div className="w-full max-w-lg p-6 bg-white rounded-lg border border-gray-300 shadow-md">
-      <div className="text-center mb-12 py-8 border-b-2 border-gray-200">
-            <h1 className="text-4xl md:text-5xl font-bold text-black mb-4 tracking-tight">
-              A2OJ-Ladder
-            </h1>
-            <div className="w-24 h-1 bg-black mx-auto mb-6"></div>
-            
+    <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-gray-50 to-gray-200">
+      <Outlet />
+      <div className="w-full max-w-lg p-8 bg-white rounded-xl border border-gray-200 shadow-lg">
+        <div className="text-center mb-8">
+          <div className="flex justify-center mb-4">
+            <Code className="h-12 w-12 text-black" />
           </div>
-        <div className="space-y-4">
+          <h1 className="text-4xl md:text-5xl font-bold text-black mb-3 tracking-tight">
+            A2OJ Ladder
+          </h1>
+          <p className="text-gray-600 mb-4">Enhance your competitive programming skills</p>
+          <div className="w-16 h-1 bg-black mx-auto"></div>
+        </div>
+        
+        <div className="space-y-6">
           {/* Username Input */}
           <div className="space-y-2">
-            <label className="flex items-center text-black">
+            <label className="flex items-center text-sm font-medium text-gray-700">
+              <User className="h-4 w-4 mr-2" />
               Codeforces Username
-              <span className="ml-1 text-black text-xs">•</span>
+              <span className="ml-1 text-red-500">*</span>
             </label>
-            <input
-              type="text"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-              className="w-full bg-gray-100 text-black px-4 py-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-500"
-            />
+            <div className="relative">
+              <input
+                type="text"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+                className="w-full bg-gray-50 text-black px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent transition-all duration-200"
+                placeholder="Enter your username"
+              />
+            </div>
           </div>
   
           {/* Ladder Type Dropdown */}
           <div className="space-y-2" ref={ladderTypeDropdownRef}>
-            <label className="text-black">Ladders type</label>
+            <label className="flex items-center text-sm font-medium text-gray-700">
+              <Award className="h-4 w-4 mr-2" />
+              Ladder Type
+            </label>
             <div className="relative">
               <div 
-                className="w-full bg-gray-100 text-black px-4 py-2 rounded-md cursor-pointer flex items-center justify-between border border-gray-300"
+                className="w-full bg-gray-50 text-black px-4 py-3 rounded-lg cursor-pointer flex items-center justify-between border border-gray-300 hover:border-gray-400 transition-all duration-200"
                 onClick={() => setIsLadderTypeOpen(!isLadderTypeOpen)}
               >
                 <span>{selectedLadderType}</span>
@@ -2032,11 +2043,11 @@ const rating_11 = [
               </div>
               
               {isLadderTypeOpen && (
-                <div className="absolute z-10 w-full mt-1 bg-white border border-gray-300 rounded-md shadow-lg">
+                <div className="absolute z-10 w-full mt-1 bg-white border border-gray-300 rounded-lg shadow-lg overflow-hidden">
                   {ladderTypes.map((type, index) => (
                     <div 
                       key={index}
-                      className="px-4 py-2 text-black hover:bg-gray-200 cursor-pointer"
+                      className="px-4 py-3 text-black hover:bg-gray-100 cursor-pointer transition-colors duration-150"
                       onClick={() => {
                         setSelectedLadderType(type);
                         setIsLadderTypeOpen(false);
@@ -2052,14 +2063,15 @@ const rating_11 = [
   
           {/* Rating/Division Selection */}
           <div className="space-y-2" ref={ratingDropdownRef}>
-            <label className="text-black">
-              {selectedLadderType === 'Rating' ? 'By rating' : 
-               selectedLadderType === 'Division' ? 'By division' : 
+            <label className="flex items-center text-sm font-medium text-gray-700">
+              <Award className="h-4 w-4 mr-2" />
+              {selectedLadderType === 'Rating' ? 'By Rating' : 
+               selectedLadderType === 'Division' ? 'By Division' : 
                `By ${selectedLadderType.toLowerCase()}`}
             </label>
             <div className="relative">
               <div 
-                className="w-full bg-gray-100 text-black px-4 py-2 rounded-md cursor-pointer flex items-center justify-between border border-gray-300"
+                className="w-full bg-gray-50 text-black px-4 py-3 rounded-lg cursor-pointer flex items-center justify-between border border-gray-300 hover:border-gray-400 transition-all duration-200"
                 onClick={() => setIsRatingDropdownOpen(!isRatingDropdownOpen)}
               >
                 <span>{getCurrentSelection()}</span>
@@ -2070,11 +2082,11 @@ const rating_11 = [
               </div>
               
               {isRatingDropdownOpen && (
-                <div className="absolute z-10 w-full mt-1 bg-white border border-gray-300 rounded-md shadow-lg max-h-60 overflow-y-auto">
+                <div className="absolute z-10 w-full mt-1 bg-white border border-gray-300 rounded-lg shadow-lg max-h-60 overflow-y-auto">
                   {getDropdownOptions().map((option, index) => (
                     <div 
                       key={index}
-                      className="px-4 py-2 text-black hover:bg-gray-200 cursor-pointer"
+                      className="px-4 py-3 text-black hover:bg-gray-100 cursor-pointer transition-colors duration-150"
                       onClick={() => handleOptionSelect(option)}
                     >
                       {option}
@@ -2086,17 +2098,23 @@ const rating_11 = [
           </div>
   
           {/* View Ladder Button */}
-          <div className="pt-2">
+          <div className="pt-4">
             <button 
               onClick={handleViewLadder} 
-              className="bg-black hover:bg-gray-800 text-white font-medium px-6 py-2 rounded-md transition-colors duration-200"
+              className="w-full bg-black hover:bg-gray-800 text-white font-medium px-6 py-3 rounded-lg transition-colors duration-200 shadow-md hover:shadow-lg flex items-center justify-center"
             >
-              View ladder
+              <Code className="h-5 w-5 mr-2" />
+              View Ladder
             </button>
           </div>
+        </div>
+        
+        <div className="mt-8 pt-6 text-center text-sm text-gray-500 border-t border-gray-200">
+          Improve your Codeforces rating with structured problem sets
         </div>
       </div>
     </div>
   );
-}
-  export default CodeforceRatingLadder;
+};
+
+export default CodeforceRatingLadder;
