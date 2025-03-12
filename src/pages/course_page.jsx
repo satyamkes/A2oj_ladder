@@ -12,7 +12,7 @@ const CoursePage = () => {
     setActiveTab(tabIndex);
   };
 
-  // Import the ArrowRight icon that was missing
+  
   const ArrowRight = ({ className }) => (
     <svg 
       xmlns="http://www.w3.org/2000/svg" 
